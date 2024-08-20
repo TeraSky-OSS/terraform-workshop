@@ -1,0 +1,40 @@
+variable "ami_name_filters" {
+  type        = list(string)
+  description = "Name filter for searching AMI"
+}
+
+variable "ami_owners" {
+  type        = list(string)
+  description = "List of AMI owners to limit search. At least 1 value must be specified. Valid values: an AWS account ID, self (the current account), or an AWS owner alias (e.g. amazon, aws-marketplace, microsoft)"
+}
+
+variable "instance_count" {
+  type        = number
+  description = "Number of instances to create"
+  default     = 1
+}
+
+variable "instance_name" {
+  type        = string
+  description = "Name of EC2 instance"
+  default     = ""
+}
+
+variable "instance_type" {
+  type        = string
+  description = "Type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance"
+  default     = "t3.micro"
+}
+
+variable "instance_key_name" {
+  type        = string
+  description = "Name of a keypair to associate with the instance"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Map of tags to apply to resources"
+  default = {
+    Terraform = "True"
+  }
+}
