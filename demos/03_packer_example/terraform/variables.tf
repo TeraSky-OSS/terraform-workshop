@@ -4,12 +4,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_profile" {
-  type        = string
-  description = "Name of AWS profile"
-  default     = "default"
-}
-
 variable "ami_name_filters" {
   type        = list(string)
   description = "Name filter for searching AMI"

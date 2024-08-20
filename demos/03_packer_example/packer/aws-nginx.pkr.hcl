@@ -1,17 +1,29 @@
 packer {
   required_plugins {
     amazon = {
-      version = ">= 0.0.2"
+      version = "~> 1"
       source  = "github.com/hashicorp/amazon"
     }
   }
 }
 
 source "amazon-ebs" "ubuntu" {
-  profile       = "terasky"
-  ami_name      = "terraform-secure-workshop-packer-nginx"
-  instance_type = "t2.micro"
-  region        = "us-east-1"
+  vpc_filter {
+    filters = {
+      "tag:Name" : "test-vpc",
+    }
+  }
+
+  subnet_filter {
+    filters = {
+      "tag:Name" : "test-subnet-public1-us-east-1a"
+    }
+  }
+
+  ami_name                    = "terraform-workshop-packer-nginx"
+  instance_type               = "t2.micro"
+  region                      = "us-east-1"
+  associate_public_ip_address = true
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
@@ -25,7 +37,7 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  name    = "terraform-secure-workshop-packer-nginx"
+  name = "terraform-workshop-packer-nginx"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
@@ -43,7 +55,7 @@ build {
   }
 
   provisioner "file" {
-    source = "index.html"
+    source      = "index.html"
     destination = "/tmp/index.html"
   }
 
