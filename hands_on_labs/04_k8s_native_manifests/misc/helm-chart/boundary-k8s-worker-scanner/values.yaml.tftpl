@@ -1,0 +1,30 @@
+# Environment - Should be similiar to the Project scope you setup in Boundary.
+environment: ${env}
+namespace: ${namespace}
+
+# Secret Store CSI Driver API Version
+secretStoreAPIVersion: ${secretStoreAPIVersion} # Example: "secrets-store.csi.x-k8s.io/v1alpha1"
+
+awsAccount: "${awsAccount}" # this is not considered sensetive. 
+awsRegion: ${awsRegion}
+eksClusterName: ${eksClusterName}
+scanInterval: ${scanInterval}
+scannerS3BucketName: ${scannerS3BucketName}
+successfulJobsHistoryLimit: ${successfulJobsHistoryLimit}
+
+# Secret Manager Secret Names:
+boundaryClusterUrlSecretName: ${boundaryClusterUrlSecretName}
+boundaryWorkerCredsSecretName: ${boundaryWorkerCredsSecretName}
+boundaryAdminCredsSecretName: ${boundaryAdminCredsSecretName}
+boundaryScopeIdSecretName: ${boundaryScopeIdSecretName} # this will also add the environment name to it like the logic of Terraform. 
+
+# Target Kubernetes Service Details
+# Make sure that the app name is similar to the Kubernetes Service Name you want to reach. 
+# port specifications is optional for cases when the kubernetes service has more then 1 port configure on it.
+# If the K8S has multiple ports configured in it, please specify the port you want to reach using boundary. 
+boundaryPluginTcpTargets:
+%{ for target in boundary_k8s_targets ~}
+  - app: "${target.app}"
+    namespace: "${target.namespace}"
+%{ if can(target.port) }    port: "${target.port}"
+%{ endif }%{ endfor ~}

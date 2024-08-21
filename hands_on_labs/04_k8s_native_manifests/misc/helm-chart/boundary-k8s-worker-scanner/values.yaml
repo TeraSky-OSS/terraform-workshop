@@ -1,0 +1,32 @@
+# Please Note, The Scanner is working as a CronJob that deploys pods, The completed pods will be deleted every 10minutes. 
+# Environment - Should be similiar to the Project scope you setup in Boundary.
+environment: "YOUR_ENVIRONMENT"
+namespace: "YOUR_NAMESPACE"
+
+# Secret Store CSI Driver API Version
+secretStoreAPIVersion: "" # Example: "secrets-store.csi.x-k8s.io/v1alpha1"
+
+awsAccount: "YOUR_AWS_ACCOUNT" # this is not considered sensetive. 
+awsRegion: "YOUR_REGION"
+eksClusterName: "YOUR_EKS_CLUSTER_NAME" 
+scanInterval: "1,30" #every 1 minute and 30seconds, This will configure the scanner cronjob time, so please use the right syntax. 
+scannerS3BucketName: "SCANNER_BUCKET_NAME"
+
+# Secret Manager Secret Names:
+boundaryClusterUrlSecretName: "boundary/cluster-url"
+boundaryWorkerCredsSecretName: "boundary/worker-creds"
+boundaryAdminCredsSecretName: "boundary/admin-creds"
+boundaryScopeIdSecretName: "boundary/scope-id" # this will also add the environment name to it like the logic of Terraform. 
+
+# Target Kubernetes Service Details
+# Make sure that the app name is similar to the Kubernetes Service Name you want to reach. 
+# port specifications is optional for cases when the kubernetes service has more then 1 port configure on it.
+# If the K8S has multiple ports configured in it, please specify the port you want to reach using boundary. 
+boundaryPluginTcpTargets:
+  - app: "nginx"
+    namespace: "ngin"
+  - app: "cockstain"
+    namespace: "default"
+    port: "8080"
+
+

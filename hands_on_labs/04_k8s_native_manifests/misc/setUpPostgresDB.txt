@@ -1,0 +1,108 @@
+echo '---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: appdb
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: rootpassword
+---
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: postgres-volume
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/postgresql"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+  name: postgres-volume-claim 
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi' > postgres-srv.yaml
+	  
+kubectl apply -f postgres-srv.yaml 
+while [[ $(kubectl get pvc postgres-volume-claim -o 'jsonpath={..status.phase}') != "Bound" ]]; do echo "waiting for PVC status" && sleep 1; done
+kubectl get pvc,pv
+
+echo 'apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12.10
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-secret
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: postgres 
+  labels:
+    app: postgres
+spec:
+  type: NodePort 
+  ports:
+    - port: 5432 
+  selector:
+    app: postgres' > postgres-deployment.yaml
+	
+kubectl apply -f postgres-deployment.yaml
+
+kubectl exec -it $(kubectl get pods -o json | jq .items[].metadata.name | grep postgres | tr -d '"') -- psql -h localhost -U root --password -p 5432 appdb
+
+
+
+
+psql -h 192.168.39.196 -U appuser --password -p 31398 appdb
+
+
+
+vault write transform/stores/postgres \
+   type=sql \
+   driver=postgres \
+   supported_transformations=tokenization \
+   connection_string='postgresql://{{username}}:{{password}}@172.20.155.221/appdb?sslmode=disable' \
+   username=root \
+   password=rootpassword

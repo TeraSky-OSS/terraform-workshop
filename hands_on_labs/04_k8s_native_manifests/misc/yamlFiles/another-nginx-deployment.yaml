@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: index-html-configmap
+  namespace: nginx
+data:
+  index.html: |
+    <html>
+    <h1>Welcome to Second Nginx Deployment</h1>
+    </br>
+    <h1>Hi! i was just detected by the boundary scanner :)</h1>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-two
+  namespace: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx-two
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx-two
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+            - name: nginx-index-file
+              mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: nginx-index-file
+        configMap:
+          name: index-html-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-two
+  namespace: nginx
+spec:
+  selector:
+    app: nginx-two
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 80
