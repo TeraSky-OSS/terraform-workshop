@@ -32,10 +32,5 @@ resource "aws_security_group" "allow_current" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = merge(
-    {
-      Name = "terraform-workshop"
-    },
-    var.tags
-  )
+  tags = {Name = "terraform-workshop"}
 }

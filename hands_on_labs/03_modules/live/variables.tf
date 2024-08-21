@@ -4,12 +4,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_profile" {
-  type        = string
-  description = "Name of AWS profile"
-  default     = "default"
-}
-
 variable "ami_name_filters" {
   type        = list(string)
   description = "Name filter for searching AMI"
@@ -41,12 +35,4 @@ variable "instance_type" {
 variable "instance_key_name" {
   type        = string
   description = "Name of a keypair to associate with the instance"
-}
-
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to apply to resources"
-  default = {
-    Terraform = "True"
-  }
 }

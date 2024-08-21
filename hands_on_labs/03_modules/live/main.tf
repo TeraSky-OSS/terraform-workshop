@@ -7,5 +7,4 @@ module "web" {
   instance_name     = var.instance_name
   instance_type     = var.instance_type
   instance_key_name = var.instance_key_name
-  tags              = var.tags
 }

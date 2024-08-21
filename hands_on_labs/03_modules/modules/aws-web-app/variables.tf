@@ -30,11 +30,3 @@ variable "instance_key_name" {
   type        = string
   description = "Name of a keypair to associate with the instance"
 }
-
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to apply to resources"
-  default = {
-    Terraform = "True"
-  }
-}

@@ -35,12 +35,7 @@ resource "aws_instance" "web" {
     ]
   }
 
-  tags = merge(
-    {
-      Name = "${var.instance_name}-${count.index}"
-    },
-    var.tags
-  )
+  tags = {Name = "${var.instance_name}-${count.index}"}
 }
 
 resource "aws_elb" "web" {
@@ -63,6 +58,4 @@ resource "aws_elb" "web" {
     target              = "HTTP:80/"
     interval            = 30
   }
-
-  tags = var.tags
 }
