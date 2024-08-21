@@ -29,10 +29,5 @@ resource "aws_instance" "web" {
 
   associate_public_ip_address = true
 
-  tags = merge(
-    {
-      Name = var.instance_name
-    },
-    var.tags
-  )
+  tags = {Name = var.instance_name}
 }
