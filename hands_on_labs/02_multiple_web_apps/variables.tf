@@ -4,49 +4,37 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_profile" {
-  type        = string
-  description = "Name of AWS profile"
-  default     = "default"
-}
-
 variable "ami_name_filters" {
   type        = list(string)
   description = "Name filter for searching AMI"
+  default     = ["bitnami-nginx-1.27.0-0-linux-debian-12-x86_64-hvm-ebs-nami"]
 }
 
 variable "ami_owners" {
   type        = list(string)
   description = "List of AMI owners to limit search. At least 1 value must be specified. Valid values: an AWS account ID, self (the current account), or an AWS owner alias (e.g. amazon, aws-marketplace, microsoft)"
+  default     = ["979382823631"]
 }
 
 variable "instance_count" {
   type        = number
   description = "Number of instances to create"
-  default     = 1
+  default     = 3
 }
 
 variable "instance_name" {
   type        = string
   description = "Name of EC2 instance"
-  default     = ""
+  default     = "terraform-workshop-web"
 }
 
 variable "instance_type" {
   type        = string
   description = "Type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance"
-  default     = "t3.micro"
+  default     = "t3.small"
 }
 
 variable "instance_key_name" {
   type        = string
   description = "Name of a keypair to associate with the instance"
-}
-
-variable "tags" {
-  type        = map(string)
-  description = "Map of tags to apply to resources"
-  default = {
-    Terraform = "True"
-  }
 }
