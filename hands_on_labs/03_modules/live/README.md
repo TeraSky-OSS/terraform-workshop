@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 No requirements.
@@ -20,15 +21,13 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ami_name_filters"></a> [ami\_name\_filters](#input\_ami\_name\_filters) | Name filter for searching AMI | `list(string)` | n/a | yes |
-| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | List of AMI owners to limit search. At least 1 value must be specified. Valid values: an AWS account ID, self (the current account), or an AWS owner alias (e.g. amazon, aws-marketplace, microsoft) | `list(string)` | n/a | yes |
-| <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | Name of AWS profile | `string` | `"default"` | no |
+| <a name="input_ami_name_filters"></a> [ami\_name\_filters](#input\_ami\_name\_filters) | Name filter for searching AMI | `list(string)` | <pre>[<br>  "bitnami-nginx-1.27.0-0-linux-debian-12-x86_64-hvm-ebs-nami"<br>]</pre> | no |
+| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | List of AMI owners to limit search. At least 1 value must be specified. Valid values: an AWS account ID, self (the current account), or an AWS owner alias (e.g. amazon, aws-marketplace, microsoft) | `list(string)` | <pre>[<br>  "979382823631"<br>]</pre> | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | Name of AWS region | `string` | `"us-east-1"` | no |
-| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create | `number` | `1` | no |
+| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create | `number` | `3` | no |
 | <a name="input_instance_key_name"></a> [instance\_key\_name](#input\_instance\_key\_name) | Name of a keypair to associate with the instance | `string` | n/a | yes |
-| <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name of EC2 instance | `string` | `""` | no |
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance | `string` | `"t3.micro"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Map of tags to apply to resources | `map(string)` | <pre>{<br>  "Terraform": "True"<br>}</pre> | no |
+| <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name of EC2 instance | `string` | `"terraform-workshop-web-modules"` | no |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance | `string` | `"t3.small"` | no |
 
 ## Outputs
 
@@ -36,3 +35,4 @@ No resources.
 |------|-------------|
 | <a name="output_instances_ips"></a> [instances\_ips](#output\_instances\_ips) | n/a |
 | <a name="output_lb_dns"></a> [lb\_dns](#output\_lb\_dns) | n/a |
+<!-- END_TF_DOCS -->

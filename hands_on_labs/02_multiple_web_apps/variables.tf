@@ -25,7 +25,7 @@ variable "instance_count" {
 variable "instance_name" {
   type        = string
   description = "Name of EC2 instance"
-  default     = "terraform-workshop-web"
+  default     = "terraform-workshop-web-multiple"
 }
 
 variable "instance_type" {

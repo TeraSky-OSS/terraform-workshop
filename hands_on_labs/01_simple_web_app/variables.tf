@@ -19,7 +19,7 @@ variable "ami_owners" {
 variable "instance_name" {
   type        = string
   description = "Name of EC2 instance"
-  default     = "terraform-workshop-web"
+  default     = "terraform-workshop-web-simple"
 }
 
 variable "instance_type" {

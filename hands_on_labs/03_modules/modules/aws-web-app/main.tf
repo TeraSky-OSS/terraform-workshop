@@ -1,4 +1,3 @@
-
 data "aws_ami" "nginx" {
   most_recent = true
 
@@ -15,6 +14,13 @@ data "aws_ami" "nginx" {
   owners = var.ami_owners
 }
 
+data "aws_subnet" "selected" {
+  filter {
+    name   = "tag:Name"
+    values = ["test-subnet-public1-us-east-1a"]
+  }
+}
+
 resource "aws_instance" "web" {
   count = var.instance_count
 
@@ -22,6 +28,9 @@ resource "aws_instance" "web" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_current.id, data.aws_security_group.default.id]
   key_name               = var.instance_key_name
+  subnet_id              = data.aws_subnet.selected.id
+
+  associate_public_ip_address = true
 
   provisioner "remote-exec" {
     connection {
@@ -35,7 +44,7 @@ resource "aws_instance" "web" {
     ]
   }
 
-  tags = {Name = "${var.instance_name}-${count.index}"}
+  tags = { Name = "${var.instance_name}-${count.index}" }
 }
 
 resource "aws_elb" "web" {
