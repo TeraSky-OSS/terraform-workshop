@@ -2,9 +2,14 @@
 
 This repository contains the demos and hands-on labs that are part of the Terraform Workshop.
 
-## Connect to AWS
+## Prerequisites
 
-
+1. Connect to your AWS account
+2. Deploy the Terraform module in [Environment Preparation](./env_preparation/)
+3. Update your `kubeconfig` file with the following command:
+   ```bash
+   aws eks --region us-east-1 update-kubeconfig --name terraform-workshop
+   ```
 
 ## Hands-On Labs
 
