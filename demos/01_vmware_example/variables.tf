@@ -34,31 +34,38 @@ variable "network" {
 }
 
 variable "vm_folder" {
-  type = string
+  description = "vSphere VM folder name"
+  type        = string
 }
 
 variable "vm_template" {
-  type = string
+  description = "vSphere VM template name"
+  type        = string
 }
 
 variable "ipv4_address" {
-  type = string
+  description = "IPv4 address for the VM"
+  type        = string
 }
 
 variable "ipv4_mask" {
-  type    = number
-  default = 24
+  description = "IPv4 netmask for the VM"
+  type        = number
+  default     = 24
 }
 
 variable "ipv4_gw" {
-  type    = string
-  default = "172.16.204.1"
+  description = "IPv4 gateway for the VM"
+  type        = string
+  default     = "172.16.204.1"
 }
 
 variable "computer_name" {
-  type = string
+  description = "Computer name for the VM"
+  type        = string
 }
 
 variable "vmName" {
-  type = string
+  description = "VM name"
+  type        = string
 }
