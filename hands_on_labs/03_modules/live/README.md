@@ -26,8 +26,10 @@ No resources.
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | Name of AWS region | `string` | `"us-east-1"` | no |
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create | `number` | `3` | no |
 | <a name="input_instance_key_name"></a> [instance\_key\_name](#input\_instance\_key\_name) | Name of a keypair to associate with the instance | `string` | n/a | yes |
-| <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name of EC2 instance | `string` | `"terraform-workshop-web-modules"` | no |
+| <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name of EC2 instance | `string` | `"terraform-workshop-web-multiple"` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Type of instance to start. Updates to this field will trigger a stop/start of the EC2 instance | `string` | `"t3.small"` | no |
+| <a name="input_selected_subnet_tier"></a> [selected\_subnet\_tier](#input\_selected\_subnet\_tier) | Tier of subnet to use | `string` | `"public"` | no |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name of VPC | `string` | `"terraform-workshop-vpc"` | no |
 
 ## Outputs
 

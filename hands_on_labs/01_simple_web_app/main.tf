@@ -18,7 +18,7 @@ data "aws_ami" "nginx" {
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["terraform-workshop-vpc"]
+    values = [var.vpc_name]
   }
 }
 
@@ -29,7 +29,7 @@ data "aws_subnets" "selected" {
   }
 
   tags = {
-    Tier = "public"
+    Tier = var.selected_subnet_tier
   }
 }
 

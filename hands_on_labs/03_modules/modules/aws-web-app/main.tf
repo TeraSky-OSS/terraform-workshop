@@ -14,10 +14,21 @@ data "aws_ami" "nginx" {
   owners = var.ami_owners
 }
 
-data "aws_subnet" "selected" {
+data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["test-subnet-public1-us-east-1a"]
+    values = [var.vpc_name]
+  }
+}
+
+data "aws_subnets" "selected" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.selected.id]
+  }
+
+  tags = {
+    Tier = var.selected_subnet_tier
   }
 }
 
@@ -28,7 +39,7 @@ resource "aws_instance" "web" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_current.id, data.aws_security_group.default.id]
   key_name               = var.instance_key_name
-  subnet_id              = data.aws_subnet.selected.id
+  subnet_id              = data.aws_subnets.selected.ids[0]
 
   associate_public_ip_address = true
 
@@ -48,7 +59,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_elb" "web" {
-  name            = "web-elb"
+  name            = "terraform-workshop-web-elb"
   subnets         = aws_instance.web.*.subnet_id
   security_groups = [aws_security_group.allow_current.id, data.aws_security_group.default.id]
   instances       = aws_instance.web.*.id
