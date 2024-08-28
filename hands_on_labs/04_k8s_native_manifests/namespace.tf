@@ -1,13 +1,5 @@
-resource "kubernetes_namespace" "example" {
+resource "kubernetes_namespace" "game_2048" {
   metadata {
-    annotations = {
-      name = "example-annotation"
-    }
-
-    labels = {
-      mylabel = "label-value"
-    }
-
-    name = "terraform-example-namespace"
+    name = "game-2048"
   }
 }
