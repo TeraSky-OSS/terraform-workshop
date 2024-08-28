@@ -1,11 +1,3 @@
-# Lab 4
-
-Once deployed, run the following command to get the LB address with the following command:
-
-```bash
-kubectl -n game-2048 get ingress ingress-2048
-```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -43,5 +35,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_game_2048_endpoint"></a> [game\_2048\_endpoint](#output\_game\_2048\_endpoint) | n/a |
 <!-- END_TF_DOCS -->
