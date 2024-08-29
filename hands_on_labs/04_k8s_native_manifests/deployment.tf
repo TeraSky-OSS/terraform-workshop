@@ -1,33 +1,57 @@
-resource "kubernetes_deployment_v1" "deployment_2048" {
+resource "kubernetes_deployment_v1" "example" {
   metadata {
-    name      = "deployment-2048"
-    namespace = kubernetes_namespace.game_2048.metadata[0].name
+    name = "terraform-example"
+    labels = {
+      test = "MyExampleApp"
+    }
+    namespace = kubernetes_namespace.example.metadata.0.name
   }
 
   spec {
-    replicas = 5
+    replicas = 3
 
     selector {
       match_labels = {
-        "app.kubernetes.io/name" = "app-2048"
+        test = "MyExampleApp"
       }
     }
 
     template {
       metadata {
         labels = {
-          "app.kubernetes.io/name" = "app-2048"
+          test = "MyExampleApp"
         }
       }
 
       spec {
         container {
-          image             = "public.ecr.aws/l6m2t8p7/docker-2048:latest"
-          name              = "app-2048"
-          image_pull_policy = "Always"
+          image = "nginx:1.21.6"
+          name  = "example"
 
-          port {
-            container_port = 80
+          resources {
+            limits = {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/"
+              port = 80
+
+              http_header {
+                name  = "X-Custom-Header"
+                value = "Awesome"
+              }
+            }
+
+            initial_delay_seconds = 3
+            period_seconds        = 3
           }
         }
       }

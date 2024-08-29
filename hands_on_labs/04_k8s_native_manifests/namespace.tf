@@ -1,5 +1,5 @@
-resource "kubernetes_namespace" "game_2048" {
+resource "kubernetes_namespace" "example" {
   metadata {
-    name = "game-2048"
+    name = "example"
   }
 }
