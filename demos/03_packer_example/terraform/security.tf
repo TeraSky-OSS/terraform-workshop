@@ -1,10 +1,3 @@
-data "aws_vpc" "selected" {
-  filter {
-    name   = "tag:Name"
-    values = ["test-vpc"]
-  }
-}
-
 data "aws_security_group" "default" {
   name   = "default"
   vpc_id = data.aws_vpc.selected.id

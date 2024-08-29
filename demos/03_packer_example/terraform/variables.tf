@@ -4,6 +4,18 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "vpc_name" {
+  description = "Name of VPC"
+  type        = string
+  default     = "terraform-workshop-vpc"
+}
+
+variable "selected_subnet_tier" {
+  description = "Tier of subnet to use"
+  type        = string
+  default     = "public"
+}
+
 variable "ami_name_filters" {
   type        = list(string)
   description = "Name filter for searching AMI"

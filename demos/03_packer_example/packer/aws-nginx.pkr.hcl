@@ -7,17 +7,28 @@ packer {
   }
 }
 
+variable "vpc_name" {
+  type    = string
+  default = "terraform-workshop-vpc"
+}
+
+variable "selected_subnet_tier" {
+  type    = string
+  default = "public"
+}
+
 source "amazon-ebs" "ubuntu" {
   vpc_filter {
     filters = {
-      "tag:Name" : "test-vpc",
+      "tag:Name" : var.vpc_name
     }
   }
 
   subnet_filter {
     filters = {
-      "tag:Name" : "test-subnet-public1-us-east-1a"
+      "tag:Tier" : var.selected_subnet_tier
     }
+    random = true
   }
 
   ami_name                    = "terraform-workshop-packer-nginx"
@@ -26,7 +37,7 @@ source "amazon-ebs" "ubuntu" {
   associate_public_ip_address = true
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
+      name                = "ubuntu/images/*ubuntu-noble-24.04-amd64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
