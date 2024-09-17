@@ -21,6 +21,8 @@ resource "kubernetes_deployment_v1" "deployment_2048" {
       }
 
       spec {
+        service_account_name = kubernetes_service_account.demo.metadata[0].name
+
         container {
           image             = "public.ecr.aws/l6m2t8p7/docker-2048:latest"
           name              = "app-2048"
