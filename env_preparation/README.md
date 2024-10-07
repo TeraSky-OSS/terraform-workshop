@@ -25,6 +25,16 @@ No requirements.
 
 | Name | Type |
 |------|------|
+| [aws_budgets_budget.workshop](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/budgets_budget) | resource |
+| [aws_iam_access_key.terraform_workshop](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
+| [aws_iam_user.terraform_workshop](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
+| [aws_iam_user_login_profile.terraform_workshop](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) | resource |
+| [aws_iam_user_policy_attachment.terraform_workshop_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
+| [aws_iam_user_policy_attachment.terraform_workshop_elb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
+| [aws_secretsmanager_secret.terraform_workshop_user_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.terraform_workshop_user_password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.terraform_workshop_user_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.terraform_workshop_user_password](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
 | [helm_release.aws_load_balancer_controller](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [kubernetes_annotations.gp2](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations) | resource |
 | [kubernetes_storage_class_v1.gp3](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/storage_class_v1) | resource |
@@ -61,4 +71,7 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | <a name="output_eks_update_kubeconfig_command"></a> [eks\_update\_kubeconfig\_command](#output\_eks\_update\_kubeconfig\_command) | Command to update kubeconfig file with the EKS cluster credentials |
+| <a name="output_iam_user_access_key"></a> [iam\_user\_access\_key](#output\_iam\_user\_access\_key) | n/a |
+| <a name="output_iam_user_password"></a> [iam\_user\_password](#output\_iam\_user\_password) | n/a |
+| <a name="output_iam_user_secret_access_key"></a> [iam\_user\_secret\_access\_key](#output\_iam\_user\_secret\_access\_key) | n/a |
 <!-- END_TF_DOCS -->

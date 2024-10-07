@@ -17,3 +17,17 @@ output "eks_update_kubeconfig_command" {
   description = "Command to update kubeconfig file with the EKS cluster credentials"
   value       = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.aws_region}"
 }
+
+output "iam_user_password" {
+  value     = aws_iam_user_login_profile.terraform_workshop.password
+  sensitive = true
+}
+
+output "iam_user_access_key" {
+  value = aws_iam_access_key.terraform_workshop.id
+}
+
+output "iam_user_secret_access_key" {
+  value     = aws_iam_access_key.terraform_workshop.secret
+  sensitive = true
+}
