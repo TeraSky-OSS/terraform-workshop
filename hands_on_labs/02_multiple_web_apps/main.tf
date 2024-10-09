@@ -38,22 +38,16 @@ resource "aws_instance" "web" {
   ami                    = data.aws_ami.nginx.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_current.id, data.aws_security_group.default.id]
-  key_name               = var.instance_key_name
   subnet_id              = data.aws_subnets.selected.ids[0]
 
   associate_public_ip_address = true
 
-  provisioner "remote-exec" {
-    connection {
-      host        = self.public_ip
-      user        = "bitnami"
-      private_key = file("~/.ssh/id_rsa")
-    }
-
-    inline = [
-      "echo \"<h1>This is server ${count.index}</h1>\" > /opt/bitnami/nginx/html/index.html"
-    ]
-  }
+  user_data = <<-EOF
+              #!/bin/bash
+              echo "<h1>This is server ${count.index}</h1>" > /opt/bitnami/nginx/html/index.html
+              EOF
+  
+  user_data_replace_on_change = true
 
   tags = { Name = "${var.instance_name}-${count.index}" }
 }

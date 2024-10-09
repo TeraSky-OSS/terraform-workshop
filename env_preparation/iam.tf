@@ -3,14 +3,9 @@ resource "aws_iam_user" "terraform_workshop" {
   force_destroy = true
 }
 
-resource "aws_iam_user_policy_attachment" "terraform_workshop_ec2" {
+resource "aws_iam_user_policy_attachment" "terraform_workshop_admin" {
   user       = aws_iam_user.terraform_workshop.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-}
-
-resource "aws_iam_user_policy_attachment" "terraform_workshop_elb" {
-  user       = aws_iam_user.terraform_workshop.name
-  policy_arn = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 resource "aws_iam_user_login_profile" "terraform_workshop" {
