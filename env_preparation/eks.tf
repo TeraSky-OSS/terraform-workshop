@@ -30,6 +30,22 @@ module "eks" {
   # Cluster access entry
   # To add the current caller identity as an administrator
   enable_cluster_creator_admin_permissions = true
+
+  access_entries = {
+    workshop_user = {
+      kubernetes_groups = []
+      principal_arn     = aws_iam_user.terraform_workshop.arn
+
+      policy_associations = {
+        cluster_admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+  }
 }
 
 ############################################
