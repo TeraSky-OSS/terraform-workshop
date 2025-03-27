@@ -1,3 +1,28 @@
+# Kubernetes Helm Integration with Terraform
+
+This hands-on lab demonstrates how to use Terraform to deploy applications to Kubernetes using Helm charts. The lab specifically shows how to:
+
+1. Deploy an Nginx application using the official Bitnami Helm chart
+2. Configure the application with custom values through a values file
+3. Set up an Application Load Balancer (ALB) ingress controller for external access
+4. Integrate Helm releases with Terraform state management
+
+## Components
+
+- **Nginx Helm Chart**: Deployed using the official Bitnami repository
+- **Ingress Configuration**: Set up with ALB ingress controller for external access
+- **Service Configuration**: Configured as ClusterIP type
+- **Replica Count**: Set to 1 instance
+
+## Prerequisites
+
+- A running EKS cluster
+- AWS CLI configured with appropriate credentials
+- kubectl configured to access the EKS cluster
+- Helm installed locally
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

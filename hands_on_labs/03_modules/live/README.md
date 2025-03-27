@@ -1,3 +1,36 @@
+# Terraform Modules Lab
+
+This hands-on lab demonstrates the use of Terraform modules to create a scalable web application infrastructure in AWS. The lab showcases how to:
+
+- Create reusable infrastructure components using modules
+- Deploy multiple EC2 instances running Nginx
+- Set up a load balancer for high availability
+- Configure infrastructure parameters through variables
+
+## Infrastructure Components
+
+The lab creates the following AWS resources:
+- Multiple EC2 instances running Nginx (Debian 12)
+- Application Load Balancer
+- Security groups for instance and load balancer access
+- VPC and subnet configuration
+
+## Usage
+
+1. Ensure you have AWS credentials configured
+2. Update the `instance_key_name` variable with your SSH key pair name
+3. Run `terraform init` to initialize the working directory
+4. Run `terraform plan` to see the execution plan
+5. Run `terraform apply` to create the infrastructure
+
+## Outputs
+
+After applying the configuration, you'll get:
+- Public IP addresses of the EC2 instances
+- DNS name of the load balancer
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

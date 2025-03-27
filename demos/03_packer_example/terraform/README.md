@@ -1,3 +1,30 @@
+# Packer AMI Demo
+
+This demo demonstrates how to use a custom AMI (Amazon Machine Image) built with Packer in a Terraform configuration. The demo includes:
+
+- Using a data source to find the most recent AMI matching specified filters
+- Creating an EC2 instance with the selected AMI
+- Setting up security groups to allow access from your current IP address
+- Using existing VPC and subnet infrastructure
+- Configuring the instance with public IP access
+
+## Usage
+
+To use this demo, you'll need to provide values for the following required variables:
+- `ami_name_filters`: List of name patterns to filter AMIs
+- `ami_owners`: List of AMI owners (e.g., your AWS account ID or "self")
+
+Optional variables include:
+- `aws_region`: AWS region to deploy to (defaults to us-east-1)
+- `instance_name`: Name for the EC2 instance
+- `instance_type`: EC2 instance type (defaults to t3.micro)
+- `vpc_name`: Name of the VPC to use (defaults to terraform-workshop-vpc)
+- `selected_subnet_tier`: Subnet tier to use (defaults to public)
+
+The demo will create an EC2 instance with the specified AMI and output its public IP address.
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

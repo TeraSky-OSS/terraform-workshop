@@ -1,3 +1,55 @@
+# Simple Web Application Lab
+
+This hands-on lab demonstrates how to deploy a simple web application using Terraform on AWS. The lab creates an EC2 instance running Nginx web server in a public subnet of your VPC.
+
+## Overview
+
+This lab will:
+1. Deploy an EC2 instance using a Bitnami Nginx AMI
+2. Configure security groups to allow access from your IP address
+3. Place the instance in a public subnet
+4. Output the public IP address of the instance
+
+## Prerequisites
+
+- AWS account with appropriate permissions
+- Terraform installed (version ~> 1.0)
+- AWS CLI configured with your credentials
+- An existing VPC with public subnets (named "terraform-workshop-vpc")
+
+## Usage
+
+1. Navigate to this directory:
+   ```bash
+   cd hands_on_labs/01_simple_web_app
+   ```
+
+2. Initialize Terraform:
+   ```bash
+   terraform init
+   ```
+
+3. Review the planned changes:
+   ```bash
+   terraform plan
+   ```
+
+4. Apply the configuration:
+   ```bash
+   terraform apply
+   ```
+
+5. Once complete, you can access the web application using the output IP address.
+
+## Cleanup
+
+To destroy the infrastructure:
+```bash
+terraform destroy
+```
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

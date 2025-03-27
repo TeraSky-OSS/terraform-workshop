@@ -1,3 +1,60 @@
+# Kubernetes Native Manifests with Terraform
+
+This hands-on lab demonstrates how to use Terraform to create and manage Kubernetes resources using native Kubernetes manifests. The lab shows how to:
+
+- Create a Kubernetes namespace
+- Deploy a sample nginx application with:
+  - Resource limits and requests
+  - Health checks (liveness probe)
+  - Multiple replicas
+  - Custom labels
+
+## Prerequisites
+
+- An AWS EKS cluster already running
+- AWS CLI configured with appropriate credentials
+- `kubectl` installed and configured
+- Terraform installed
+
+## Lab Structure
+
+- `namespace.tf`: Creates a Kubernetes namespace
+- `deployment.tf`: Creates a Kubernetes deployment running nginx
+- `terraform.tf`: Configures the Kubernetes provider and AWS authentication
+- `variables.tf`: Defines input variables for AWS region and EKS cluster name
+
+## Usage
+
+1. Ensure your AWS credentials are configured
+2. Update the variables in `variables.tf` if your EKS cluster name or region is different
+3. Initialize Terraform:
+   ```bash
+   terraform init
+   ```
+4. Review the planned changes:
+   ```bash
+   terraform plan
+   ```
+5. Apply the configuration:
+   ```bash
+   terraform apply
+   ```
+
+## Expected Results
+
+After applying the configuration, you should see:
+- A new namespace named "example"
+- A deployment running 3 replicas of nginx
+- The deployment will have resource limits and health checks configured
+
+You can verify the deployment using:
+```bash
+kubectl get pods -n example
+kubectl describe deployment terraform-example -n example
+```
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

@@ -1,3 +1,33 @@
+# Multiple Web Apps with Load Balancer
+
+This hands-on lab demonstrates how to create multiple web servers behind an Elastic Load Balancer (ELB) using Terraform. The lab creates:
+
+- Multiple EC2 instances running Nginx web server
+- An Elastic Load Balancer to distribute traffic across the instances
+- Security groups to control access
+- Each instance displays a unique page showing its server number
+
+## Components
+
+- **EC2 Instances**: Multiple instances running Nginx web server
+- **Elastic Load Balancer**: Distributes incoming traffic across the EC2 instances
+- **Security Groups**: Controls inbound and outbound traffic
+- **VPC and Subnets**: Uses existing VPC infrastructure
+- **AMI**: Uses Bitnami Nginx AMI for the web servers
+
+## Usage
+
+1. Ensure you have the required VPC infrastructure set up
+2. Update the variables in `terraform.tfvars` if needed
+3. Run `terraform init` and `terraform apply`
+4. Access the web application through the load balancer DNS name
+
+The lab will output:
+- Public IPs of all instances
+- Load balancer DNS name
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

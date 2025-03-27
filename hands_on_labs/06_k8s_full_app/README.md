@@ -1,3 +1,41 @@
+# Kubernetes Full Application Deployment Lab
+
+This hands-on lab demonstrates how to deploy a complete application (2048 game) to a Kubernetes cluster using Terraform. The lab covers various Kubernetes resources and concepts including:
+
+- Namespace creation and management
+- Deployment configuration with multiple replicas
+- Service configuration (NodePort)
+- Ingress setup with AWS ALB
+- Persistent Volume Claims
+- Service Accounts
+- Resource organization and modularity
+
+## Application Details
+The lab deploys the popular 2048 game as a containerized application. The application is exposed through an AWS Application Load Balancer (ALB) ingress controller, making it accessible from the internet.
+
+## Prerequisites
+- An AWS EKS cluster already deployed
+- AWS CLI configured with appropriate credentials
+- kubectl installed and configured
+- Terraform installed
+
+## Infrastructure Components
+- **Namespace**: Creates an isolated namespace `game-2048` for the application
+- **Deployment**: Deploys 5 replicas of the 2048 game container
+- **Service**: Exposes the application using NodePort service type
+- **Ingress**: Configures an ALB ingress controller for external access
+- **PVC**: Sets up persistent storage using AWS EBS volumes
+- **Service Account**: Creates a dedicated service account for the application
+
+## Usage
+1. Ensure your AWS credentials and EKS cluster access are configured
+2. Initialize Terraform: `terraform init`
+3. Review the planned changes: `terraform plan`
+4. Apply the configuration: `terraform apply`
+5. Access the application using the provided endpoint in the outputs
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

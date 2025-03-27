@@ -1,3 +1,56 @@
+# AWS Environment Preparation Module
+
+This Terraform module prepares an AWS account for a workshop environment by setting up the following infrastructure:
+
+## Overview
+
+This module creates a complete AWS environment suitable for running workshops, including:
+
+- **VPC Infrastructure**
+  - Public and private subnets across multiple availability zones
+  - NAT Gateway for private subnet connectivity
+  - Internet Gateway for public subnet connectivity
+  - Appropriate routing tables and network configurations
+
+- **EKS Cluster**
+  - Managed EKS cluster with the latest version
+  - Managed node group with t3a.small instances
+  - AWS Load Balancer Controller for ingress management
+  - EBS CSI Driver for persistent storage
+  - GP3 storage class as default
+
+- **IAM Resources**
+  - Workshop user with administrative access
+  - Access keys and login credentials
+  - Secure storage of credentials in AWS Secrets Manager
+
+- **Budget Controls**
+  - Monthly budget of $100 USD
+  - Email notifications at 50% threshold
+
+## Usage
+
+```hcl
+module "env_preparation" {
+  source = "./env_preparation"
+
+  aws_region         = "us-east-1"
+  eks_cluster_name   = "terraform-workshop"
+  eks_cluster_version = "1.30"
+  vpc_name          = "terraform-workshop-vpc"
+  vpc_cidr          = "10.0.0.0/16"
+}
+```
+
+## Important Notes
+
+- The module creates an IAM user with administrative access. Make sure to rotate credentials after the workshop.
+- The EKS cluster is configured with public access enabled for workshop purposes.
+- The VPC is configured with both public and private subnets to support the EKS cluster requirements.
+- All resources are tagged with `Terraform = "True"` and `Project = "Terraform Workshop"` for easy identification.
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

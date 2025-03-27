@@ -1,3 +1,36 @@
+# Terraform Tests Demo
+
+This demo showcases how to use Terraform's built-in testing framework to verify infrastructure deployments. It creates a static website hosted on AWS S3 and includes tests to verify:
+
+- Correct bucket naming
+- Proper file uploads with correct content hashes
+- Website accessibility and HTTP response codes
+
+The demo consists of:
+- A main Terraform configuration that creates an S3 bucket and configures it for website hosting
+- A test configuration that verifies the infrastructure setup
+- A simple static website with a Tetris game implementation
+
+## Running the Demo
+
+1. Initialize Terraform:
+   ```bash
+   terraform init
+   ```
+
+2. Run the tests:
+   ```bash
+   terraform test
+   ```
+
+The tests will:
+1. Generate a random bucket name prefix
+2. Create the S3 bucket with the website files
+3. Verify the bucket configuration and file uploads
+4. Test the website endpoint accessibility
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
