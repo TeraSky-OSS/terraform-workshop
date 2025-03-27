@@ -19,6 +19,7 @@ This repository contains the demos and hands-on labs that are part of the Terraf
 - **[Kubernetes Terraform Example - Native Manifests](./hands_on_labs/04_k8s_native_manifests)** - Terraform module to deploy native manifests to a Kubernetes cluster
 - **[Kubernetes Terraform Example - Using Helm](./hands_on_labs/05_k8s_helm)** - Terraform module to deploy Helm chart to a Kubernetes cluster
 - **[Kubernetes Terraform Example - Full Application](./hands_on_labs/06_k8s_full_app)** - Terraform module to deploy full application to a Kubernetes cluster
+- **[Deploy Web Application on Azure](./hands_on_labs/07_azure_webapp/)** - Terraform module to deploy a web application on Azure
 
 ## Demos
 
