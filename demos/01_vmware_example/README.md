@@ -1,3 +1,21 @@
+# VMware VM Deployment Demo
+
+This demo demonstrates how to deploy a Windows virtual machine in VMware vSphere using Terraform. The configuration uses the official VMware vSphere provider and a community module to create a fully configured Windows VM with custom networking settings.
+
+## Overview
+
+This demo will:
+- Deploy a Windows VM from an existing template
+- Configure networking with static IP address
+- Set up domain and workgroup settings
+- Configure system resources (CPU, RAM)
+- Set up DNS and gateway settings
+- Enable auto-login and run-once scripts
+
+**Note**: The deployment process typically takes around 10 minutes to complete, as it involves creating the VM from a template and applying all configurations.
+
+---
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
