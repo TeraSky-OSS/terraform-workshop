@@ -37,15 +37,13 @@ Before starting the labs, ensure you have:
 - **[Helm Integration](./hands_on_labs/05_k8s_helm)** - Deploy applications using Helm charts
 - **[Full Application Stack](./hands_on_labs/06_k8s_full_app)** - Deploy a complete application stack to Kubernetes
 
-### Multi-Cloud Labs
-- **[Azure Web Application](./hands_on_labs/07_azure_webapp/)** - Deploy a web application on Azure using Terraform
-
 ## 🎓 Demos
 
 ### Advanced Topics
 - **[VMware Integration](./demos/01_vmware_example)** - Deploy VMs on VMware vSphere
 - **[Terraform Testing](./demos/02_terraform_tests)** - Learn about testing Terraform configurations
 - **[Packer Integration](./demos/03_packer_example)** - Create custom machine images with Packer
+- **[Azure Web Application](./demos/04_azure_webapp/)** - Deploy a web application on Azure using Terraform
 
 ## 🛠️ Getting Started
 
