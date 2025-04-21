@@ -143,5 +143,11 @@ variable "eks_cluster_name" {
 variable "eks_cluster_version" {
   description = "Version of the EKS cluster"
   type        = string
-  default     = "1.30"
+  default     = "1.32"
+}
+
+variable "cluster_admins_iam_roles" {
+  description = "List of IAM roles to be added as cluster admins"
+  type        = list(string)
+  default     = ["AWSReservedSSO_AWSAdministratorAccess"]
 }

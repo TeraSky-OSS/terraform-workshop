@@ -1,3 +1,9 @@
+data "aws_iam_roles" "eks_cluster_admins" {
+  for_each = toset(var.cluster_admins_iam_roles)
+
+  name_regex = ".*${each.key}.*"
+}
+
 ############################################
 # EKS Cluster
 ############################################
@@ -31,10 +37,9 @@ module "eks" {
   # To add the current caller identity as an administrator
   enable_cluster_creator_admin_permissions = true
 
-  access_entries = {
+  access_entries = merge({
     workshop_user = {
-      kubernetes_groups = []
-      principal_arn     = aws_iam_user.terraform_workshop.arn
+      principal_arn = aws_iam_user.terraform_workshop.arn
 
       policy_associations = {
         cluster_admin = {
@@ -45,7 +50,21 @@ module "eks" {
         }
       }
     }
-  }
+    },
+    {
+      for role_name, role in data.aws_iam_roles.eks_cluster_admins : role_name => {
+        principal_arn = tolist(role.arns)[0]
+
+        policy_associations = {
+          cluster_admin = {
+            policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+            access_scope = {
+              type = "cluster"
+            }
+          }
+        }
+      }
+  })
 }
 
 ############################################
