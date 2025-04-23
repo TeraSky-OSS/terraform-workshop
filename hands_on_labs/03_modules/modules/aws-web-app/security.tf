@@ -3,9 +3,10 @@ data "aws_security_group" "default" {
   vpc_id = data.aws_vpc.selected.id
 }
 
-data "http" "myip" {
-  url = "http://icanhazip.com"
-}
+# This is commented out since the site is blocked for some networks
+# data "http" "myip" {
+#   url = "http://icanhazip.com"
+# }
 
 resource "aws_security_group" "allow_current" {
   name        = "terraform-workshop"
@@ -25,7 +26,7 @@ resource "aws_security_group" "allow_current" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"] # ["${chomp(data.http.myip.response_body)}/32"]
   }
 
   egress {

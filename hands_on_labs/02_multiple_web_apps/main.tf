@@ -46,7 +46,7 @@ resource "aws_instance" "web" {
               #!/bin/bash
               echo "<h1>This is server ${count.index}</h1>" > /opt/bitnami/nginx/html/index.html
               EOF
-  
+
   user_data_replace_on_change = true
 
   tags = { Name = "${var.instance_name}-${count.index}" }

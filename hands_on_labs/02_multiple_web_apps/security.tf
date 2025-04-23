@@ -25,8 +25,7 @@ resource "aws_security_group" "allow_current" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    # cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] # ["${chomp(data.http.myip.response_body)}/32"]
   }
 
   egress {

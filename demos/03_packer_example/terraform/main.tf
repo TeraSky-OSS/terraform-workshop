@@ -39,5 +39,5 @@ resource "aws_instance" "web" {
 
   associate_public_ip_address = true
 
-  tags = {Name = var.instance_name}
+  tags = { Name = var.instance_name }
 }
