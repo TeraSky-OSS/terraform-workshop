@@ -87,18 +87,14 @@ do
         echo "S3 bucket created and versioning enabled."
     fi
     
-    # Create backend configuration file
-    cat > backend.tfvars << EOF
-bucket       = "$S3_BUCKET_NAME"
-key          = "terraform.tfstate"
-region       = "$S3_BUCKET_REGION"
-encrypt      = true
-use_lockfile = true
-EOF
-    
     # Initialize and apply Terraform with S3 backend
     echo "Initializing Terraform with S3 backend..."
-    terraform init -backend-config=backend.tfvars -reconfigure
+    terraform init -backend-config="bucket=$S3_BUCKET_NAME" \
+                   -backend-config="key=terraform.tfstate" \
+                   -backend-config="region=$S3_BUCKET_REGION" \
+                   -backend-config="encrypt=true" \
+                   -backend-config="use_lockfile=true" \
+                   -reconfigure
     
     echo "Applying Terraform configuration..."
     terraform apply -auto-approve
