@@ -1,5 +1,5 @@
 data "aws_iam_roles" "eks_cluster_admins" {
-  for_each = toset(var.cluster_admins_iam_roles)
+  for_each = var.create_eks_cluster ? toset(var.cluster_admins_iam_roles) : toset([])
 
   name_regex = ".*${each.key}.*"
 }
@@ -11,6 +11,8 @@ data "aws_iam_roles" "eks_cluster_admins" {
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
+
+  create = var.create_eks_cluster
 
   cluster_name    = var.eks_cluster_name
   cluster_version = var.eks_cluster_version
@@ -75,6 +77,8 @@ module "load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.44"
 
+  count = var.create_eks_cluster ? 1 : 0
+
   role_name                              = "load-balancer-controller"
   attach_load_balancer_controller_policy = true
 
@@ -87,6 +91,8 @@ module "load_balancer_controller_irsa_role" {
 }
 
 resource "helm_release" "aws_load_balancer_controller" {
+  count = var.create_eks_cluster ? 1 : 0
+
   name       = "aws-load-balancer-controller"
   namespace  = "kube-system"
   repository = "https://aws.github.io/eks-charts"
@@ -109,7 +115,7 @@ resource "helm_release" "aws_load_balancer_controller" {
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = module.load_balancer_controller_irsa_role.iam_role_arn
+    value = module.load_balancer_controller_irsa_role[0].iam_role_arn
   }
 }
 
@@ -120,6 +126,8 @@ resource "helm_release" "aws_load_balancer_controller" {
 module "ebs_csi_driver_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.44"
+
+  count = var.create_eks_cluster ? 1 : 0
 
   role_name_prefix = "${module.eks.cluster_name}-ebs-csi-driver-"
 
@@ -137,6 +145,8 @@ module "eks_blueprints_addons" {
   source  = "aws-ia/eks-blueprints-addons/aws"
   version = "~> 1.16"
 
+  count = var.create_eks_cluster ? 1 : 0
+
   cluster_name      = module.eks.cluster_name
   cluster_endpoint  = module.eks.cluster_endpoint
   cluster_version   = module.eks.cluster_version
@@ -146,7 +156,7 @@ module "eks_blueprints_addons" {
 
   eks_addons = {
     aws-ebs-csi-driver = {
-      service_account_role_arn = module.ebs_csi_driver_irsa.iam_role_arn
+      service_account_role_arn = module.ebs_csi_driver_irsa[0].iam_role_arn
     }
     coredns    = {}
     vpc-cni    = {}
@@ -155,6 +165,8 @@ module "eks_blueprints_addons" {
 }
 
 resource "kubernetes_annotations" "gp2" {
+  count = var.create_eks_cluster ? 1 : 0
+
   api_version = "storage.k8s.io/v1"
   kind        = "StorageClass"
   # This is true because the resources was already created by the ebs-csi-driver addon
@@ -175,6 +187,8 @@ resource "kubernetes_annotations" "gp2" {
 }
 
 resource "kubernetes_storage_class_v1" "gp3" {
+  count = var.create_eks_cluster ? 1 : 0
+
   metadata {
     name = "gp3"
 

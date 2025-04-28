@@ -134,6 +134,12 @@ variable "private_route_table_tags" {
 # EKS
 #######################################################
 
+variable "create_eks_cluster" {
+  description = "Controls whether to create the EKS cluster and related resources"
+  type        = bool
+  default     = true
+}
+
 variable "eks_cluster_name" {
   description = "Name of the EKS cluster"
   type        = string

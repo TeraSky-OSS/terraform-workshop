@@ -15,7 +15,7 @@
 
 output "eks_update_kubeconfig_command" {
   description = "Command to update kubeconfig file with the EKS cluster credentials"
-  value       = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.aws_region}"
+  value       = var.create_eks_cluster ? "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.aws_region}" : null
 }
 
 output "iam_user_password" {
