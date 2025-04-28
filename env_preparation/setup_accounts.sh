@@ -12,6 +12,21 @@ if [ ! -f "accounts.csv" ]; then
     exit 1
 fi
 
+# Check if create_eks parameter is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <create_eks>"
+    echo "  create_eks: true or false to control EKS cluster creation"
+    exit 1
+fi
+
+CREATE_EKS=$1
+
+# Validate create_eks parameter
+if [ "$CREATE_EKS" != "true" ] && [ "$CREATE_EKS" != "false" ]; then
+    echo "Error: create_eks must be either 'true' or 'false'"
+    exit 1
+fi
+
 # Fetch Labs-Admin credentials from Secrets Manager
 echo "Fetching Labs-Admin credentials from Secrets Manager..."
 LABS_ADMIN_CREDS=$(aws secretsmanager get-secret-value \
@@ -97,10 +112,12 @@ do
                    -reconfigure
     
     echo "Applying Terraform configuration..."
-    terraform apply -auto-approve
+    terraform apply -auto-approve -var="create_eks_cluster=$CREATE_EKS"
     
     # Get the outputs from Terraform
-    kubeconfig_cmd=$(terraform output -raw eks_update_kubeconfig_command)
+    if [ "$CREATE_EKS" = "true" ]; then
+        kubeconfig_cmd=$(terraform output -raw eks_update_kubeconfig_command)
+    fi
     iam_user_access_key=$(terraform output -raw iam_user_access_key)
     iam_user_secret_access_key=$(terraform output -raw iam_user_secret_access_key)
     iam_user_password=$(terraform output -raw iam_user_password)

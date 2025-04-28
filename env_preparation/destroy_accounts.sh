@@ -12,6 +12,21 @@ if [ ! -f "accounts.csv" ]; then
     exit 1
 fi
 
+# Check if create_eks parameter is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <create_eks>"
+    echo "  create_eks: true or false to control EKS cluster creation"
+    exit 1
+fi
+
+CREATE_EKS=$1
+
+# Validate create_eks parameter
+if [ "$CREATE_EKS" != "true" ] && [ "$CREATE_EKS" != "false" ]; then
+    echo "Error: create_eks must be either 'true' or 'false'"
+    exit 1
+fi
+
 # Fetch Labs-Admin credentials from Secrets Manager
 echo "Fetching Labs-Admin credentials from Secrets Manager..."
 LABS_ADMIN_CREDS=$(aws secretsmanager get-secret-value \
@@ -73,7 +88,7 @@ do
                    -reconfigure
     
     echo "Destroying Terraform configuration..."
-    terraform destroy -auto-approve
+    terraform destroy -auto-approve -var="create_eks_cluster=$CREATE_EKS"
 done
 
 echo "All accounts processed."
