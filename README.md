@@ -127,22 +127,22 @@ If you need to prepare multiple AWS accounts for the workshop, you can use the p
 ## 🎯 Hands-On Labs
 
 ### AWS Labs
-- **[Simple Web Application](./hands_on_labs/01_simple_web_app)** - Deploy a basic web application on AWS using Terraform
-- **[Multiple Web Applications](./hands_on_labs/02_multiple_web_apps)** - Manage multiple web applications with Terraform
-- **[Module Separation](./hands_on_labs/03_modules)** - Learn about Terraform module organization and reusability
+- **[Simple Web Application](./hands_on_labs/aws/simple_web_app)** - Deploy a basic web application on AWS using Terraform
+- **[Multiple Web Applications](./hands_on_labs/aws/multiple_web_apps)** - Manage multiple web applications with Terraform
+- **[Module Separation](./hands_on_labs/aws/modules)** - Learn about Terraform module organization and reusability
 
 ### Kubernetes Labs
-- **[Native Manifests](./hands_on_labs/04_k8s_native_manifests)** - Deploy Kubernetes resources using native manifests
-- **[Helm Integration](./hands_on_labs/05_k8s_helm)** - Deploy applications using Helm charts
-- **[Full Application Stack](./hands_on_labs/06_k8s_full_app)** - Deploy a complete application stack to Kubernetes
+- **[Native Manifests](./hands_on_labs/kubernetes/k8s_native_manifests)** - Deploy Kubernetes resources using native manifests
+- **[Helm Integration](./hands_on_labs/kubernetes/k8s_helm)** - Deploy applications using Helm charts
+- **[Full Application Stack](./hands_on_labs/kubernetes/k8s_full_app)** - Deploy a complete application stack to Kubernetes
 
 ## 🎓 Demos
 
-### Advanced Topics
-- **[VMware Integration](./demos/01_vmware_example)** - Deploy VMs on VMware vSphere
-- **[Terraform Testing](./demos/02_terraform_tests)** - Learn about testing Terraform configurations
-- **[Packer Integration](./demos/03_packer_example)** - Create custom machine images with Packer
-- **[Azure Web Application](./demos/04_azure_webapp/)** - Deploy a web application on Azure using Terraform
+- **[VMware Integration](./demos/vmware)** - Deploy VMs on VMware vSphere
+- **[Terraform Testing](./demos/terraform_tests)** - Learn about testing Terraform configurations
+- **[Packer Integration](./demos/packer)** - Create custom machine images with Packer
+- **[Azure Web Application](./demos/azure_webapp/)** - Deploy a web application on Azure using Terraform
+- **[Folder Structure Example](./demos/folder_structure_example/)** - Understand best practices for organizing Terraform projects
 
 ## 🛠️ Getting Started
 
