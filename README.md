@@ -130,6 +130,8 @@ If you need to prepare multiple AWS accounts for the workshop, you can use the p
 - **[Simple Web Application](./hands_on_labs/aws/simple_web_app)** - Deploy a basic web application on AWS using Terraform
 - **[Multiple Web Applications](./hands_on_labs/aws/multiple_web_apps)** - Manage multiple web applications with Terraform
 - **[Module Separation](./hands_on_labs/aws/modules)** - Learn about Terraform module organization and reusability
+- **[VPC and Subnets](./hands_on_labs/aws/vpc_subnets)** - Set up a VPC with public and private subnets using Terraform
+- **[VPC and Transit Gateway](./hands_on_labs/aws/transit_gateway)** - Create a VPC with public and private subnets and set up an AWS Transit Gateway using Terraform
 
 ### Kubernetes Labs
 - **[Native Manifests](./hands_on_labs/kubernetes/k8s_native_manifests)** - Deploy Kubernetes resources using native manifests
