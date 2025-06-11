@@ -19,7 +19,7 @@ variable "selected_subnet_tier" {
 variable "ami_name_filters" {
   description = "Name filter for searching AMI"
   type        = list(string)
-  default     = ["bitnami-nginx-1.27.0-0-linux-debian-12-x86_64-hvm-ebs-nami"]
+  default     = ["bitnami-nginx-*"]
 }
 
 variable "ami_owners" {
