@@ -133,7 +133,7 @@ No modules.
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | Name of AWS region | `string` | `"us-east-1"` | no |
 | <a name="input_ram_principals"></a> [ram\_principals](#input\_ram\_principals) | List of AWS account IDs or organization ARNs to share the subnets with | `list(string)` | n/a | yes |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | CIDR block for the VPC | `string` | `"10.0.0.0/16"` | no |
-| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name of VPC | `string` | `"terraform-workshop-vpc"` | no |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name of VPC | `string` | `"terraform-workshop-vpc-lab"` | no |
 
 ## Outputs
 

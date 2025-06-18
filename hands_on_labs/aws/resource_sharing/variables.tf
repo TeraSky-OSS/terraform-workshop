@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "vpc_name" {
   description = "Name of VPC"
   type        = string
-  default     = "terraform-workshop-vpc"
+  default     = "terraform-workshop-vpc-lab"
 }
 
 variable "vpc_cidr" {
